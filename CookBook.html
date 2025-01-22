@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nana's cookbook</title>
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #a5dacc;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .search-bar input {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+        }
+        .category {
+            margin-bottom: 20px;
+        }
+        .category h2 {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            width: fit-content;
+        }
+        .recipes {
+            display: none;
+            margin-left: 20px;
+        }
+        .recipe {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nana's cookbook</h1>
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search for recipes...">
+    </div>
+
+    <div class="category">
+        <h2 onclick="toggleRecipes('breakfast')">Breakfast</h2>
+        <div class="recipes" id="breakfast">
+            <div class="recipe" data-name="example">example: ingredients and recipe...</div>
+            <div class="recipe" data-name="example">example: ingredients and recipe...</div>
+            <div class="recipe" data-name="example">example: ingredients and recipe...</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2 onclick="toggleRecipes('lunch')">Lunch</h2>
+        <div class="recipes" id="lunch">
+            <div class="recipe" data-name="example">example: ingredients and recipe...</div>
+            <div class="recipe" data-name="example">example: ingredients and recipe...</div>
+            <div class="recipe" data-name="example">example: ingredients and recipe...</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2 onclick="toggleRecipes('dinner')">Dinner</h2>
+        <div class="recipes" id="dinner">
+            <div class="recipe" data-name="example">example: ingredients and recipe...</div>
+            <div class="recipe" data-name="example">example: ingredients and recipe...</div>
+            <div class="recipe" data-name="example">example: ingredients and recipe...</div>
+        </div>
+    </div>
+
+    <script>
+        // Show or hide the recipes
+        function toggleRecipes(categoryId) {
+            const category = document.getElementById(categoryId);
+            if (category.style.display === "none" || category.style.display === "") {
+                category.style.display = "block";
+            } else {
+                category.style.display = "none";
+            }
+        }
+
+        // Search for recipes
+        document.getElementById("search").addEventListener("input", function (e) {
+            const query = e.target.value.toLowerCase();
+            const recipes = document.querySelectorAll(".recipe");
+            recipes.forEach(recipe => {
+                if (recipe.getAttribute("data-name").toLowerCase().includes(query)) {
+                    recipe.classList.remove("hidden");
+                } else {
+                    recipe.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
